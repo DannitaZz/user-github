@@ -4,12 +4,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Repositories from './components/repositories';
 import SignIn from './components/login';
+import ResponsiveAppBar from './components/navbar';
 
-const theme = createTheme({
+let theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
       main: '#1a4da1',
+      dark: '#161b22',
     },
     secondary: {
       main: '#1A4DA1',
@@ -29,30 +31,17 @@ const theme = createTheme({
       main: '#fafafa',
     },
   },
-  overrides: {
-    MuiAppBar: {
-      colorInherit: {
-        backgroundColor: '#161B22',
-        color: '#fff',
-      },
-    },
-  },
-  props: {
-    MuiAppBar: {
-      color: 'inherit',
-    },
-  },
-  }
+}
 );
-
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-    <div className="App">
-      <SignIn/>
-    </div>
+      <div className="App">
+        <ResponsiveAppBar />
+        {/* <SignIn/> */}
+      </div>
     </ThemeProvider>
   );
 }

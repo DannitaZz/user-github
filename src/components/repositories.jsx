@@ -72,7 +72,6 @@ function Repositories() {
     return (
       <>
         <p>Repositorios GitHub</p>
-
       </>
     );
 }

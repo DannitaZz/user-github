@@ -21,6 +21,7 @@ function Repositories({dispatch, state}) {
             createdAt
             name
             description
+            id
           }
         }
       }

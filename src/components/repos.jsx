@@ -13,8 +13,9 @@ function ReposList({ state, dispatch }) {
   return (
 
     <List sx={{ width: '100%', maxWidth: 1500, bgcolor: 'background.paper' }} align='center'>
-      {state && state.repos.map((repo) => {
-        return <div key={repo.id}>
+      {state && state.repos.map((repo, i) => {
+        
+        return <div key={i}>
           <ListItem alignItems="center">
             <ListItemText
               align="center"
@@ -33,7 +34,7 @@ function ReposList({ state, dispatch }) {
                 </React.Fragment>
               }
             />
-            <StarBorderSharpIcon />
+            <StarBorderSharpIcon onClick={(e) => dispatch({type: 'favs', value: repo.id})}/>
           </ListItem>
           <Divider variant="inset" component="li" />
         </div>

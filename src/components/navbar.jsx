@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
@@ -32,7 +31,7 @@ const ResponsiveAppBar = () => {
   };
 
   const navigateToRepo = (e) => {
-      console.log('Renderiza', e.target.value)
+
       if (e.target.value === '0'){
             navigateTo('/repositories');
       }
@@ -44,7 +43,6 @@ const ResponsiveAppBar = () => {
 
   const navigateToRepo_ = (e) => {
     const { value } =  e.target.innerText;
-    console.log('Renderiza: ', e.target.innerText);
     if (e.target.innerText === 'Repositories'){
           navigateTo('/repositories');
     }

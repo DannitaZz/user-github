@@ -1,5 +1,3 @@
-import { valueToPercent } from "@mui/material"
-
 export const initialState = {
     username : '',
     token: '',
@@ -28,7 +26,6 @@ export const reducer = (state, action) => {
             return {...state, repos: repos}
         case 'favs': 
             const id = action.value;
-            console.log('antes', state.favs)
             let currentFavs = JSON.parse(JSON.stringify(state.favs));
             const currentRepos = JSON.parse(JSON.stringify(state.repos));
 
@@ -43,7 +40,7 @@ export const reducer = (state, action) => {
                     newRepos.push(element);
                 }
             });
-            console.log('Reducer', newRepos);
+        
             return {...state, favs: currentFavs, favRepos: newRepos}
     }
 }

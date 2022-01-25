@@ -38,7 +38,7 @@ export default function SignIn({state, dispatch}) {
     }
     dispatch({type: 'signIn', value: user})
     navigateTo('/repositories')
-    console.log(user);
+    
   };
 
   return (

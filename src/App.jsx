@@ -7,12 +7,7 @@ import Layout from './components/layout';
 import Favorites from './components/favorites';
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from 'react-router-dom';
-import Repos from './components/repos';
 import { reducer, initialState } from './components/reducer';
-
-
-
-
 
 
 function App() {

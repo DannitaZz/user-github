@@ -2,14 +2,6 @@ import React, {useEffect} from "react";
 import axios from 'axios';
 import Repos from "./repos";
 
-
-/* const user = {
-    token: "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",
-    username: "dannitazz"
-} */
-
-
-
 function Repositories({state, dispatch}) {
   
   const bodyRepo = {
@@ -42,7 +34,6 @@ function Repositories({state, dispatch}) {
       try {
         const response = await axios({method: "post", url: baseUrl,  data: JSON.stringify(bodyRepo), headers: headers});
         const data = response.data.data.user.repositories.nodes;
-        console.log('data: ', data)
         dispatch({type: 'setRepositories', value: data})
       } catch (error) {
         console.error(error);

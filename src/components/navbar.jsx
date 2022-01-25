@@ -42,6 +42,18 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(null);
   };
 
+  const navigateToRepo_ = (e) => {
+    const { value } =  e.target.innerText;
+    console.log('Renderiza: ', e.target.innerText);
+    if (e.target.innerText === 'Repositories'){
+          navigateTo('/repositories');
+    }
+    else if (e.target.innerText=== 'Favorites') {
+          navigateTo('/favorites');
+    }
+  setAnchorElNav(null);
+};
+
   const handleCloseUserMenu = () => {
       navigateTo('/');
     setAnchorElUser(null);
@@ -85,14 +97,14 @@ const ResponsiveAppBar = () => {
                 horizontal: 'left',
               }}
               open={Boolean(anchorElNav)}
-              onClose={navigateToRepo}
+              /* onClose={navigateToRepo} */
               sx={{
                 display: { xs: 'block', md: 'none' },
               }}
             >
               {pages.map((page, i) => (
-                <MenuItem key={page} value={i} onClick={navigateToRepo}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page} >
+                  <Typography textAlign="center" data-my-value={i} onClick={navigateToRepo_}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>

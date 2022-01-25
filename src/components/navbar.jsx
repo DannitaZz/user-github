@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import logo from '../img/github_logo.png'
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from "react-router-dom";
 
 const pages = ['Repositories', 'Favorites'];
 const settings = ['Logout'];
@@ -21,6 +22,8 @@ const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
+  const navigateTo = useNavigate();
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -28,12 +31,19 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-      console.log('Renderiza repositorios')
+  const navigateToRepo = (e) => {
+      console.log('Renderiza', e.target.value)
+      if (e.target.value === '0'){
+            navigateTo('/repositories');
+      }
+      else if (e.target.value === '1') {
+            navigateTo('/favorites');
+      }
     setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
+      navigateTo('/');
     setAnchorElUser(null);
   };
 
@@ -75,13 +85,13 @@ const ResponsiveAppBar = () => {
                 horizontal: 'left',
               }}
               open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+              onClose={navigateToRepo}
               sx={{
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+              {pages.map((page, i) => (
+                <MenuItem key={page} value={i} onClick={navigateToRepo}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -89,10 +99,11 @@ const ResponsiveAppBar = () => {
           </Box>
           
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((page, i) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                value={i}
+                onClick={navigateToRepo}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}

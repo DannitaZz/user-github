@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -25,15 +26,19 @@ function Copyright(props) {
 }
 
 
-export default function SignIn() {
+export default function SignIn({state, dispatch}) {
+  const navigateTo = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
+    const user = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+    }
+    dispatch({type: 'signIn', value: user})
+    navigateTo('/repositories')
+    console.log(user);
   };
 
   return (

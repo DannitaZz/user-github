@@ -1,77 +1,59 @@
 import React, {useEffect} from "react";
 import axios from 'axios';
+import Repos from "./repos";
 
-const user = {
-    token: "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",
+
+/* const user = {
+    token: "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",
     username: "dannitazz"
-}
+} */
 
-const bodyRepo = {
-  "query": `
-  query {
-    user(login: "${user.username}") {
-      repositories(first: 15, orderBy: {field: CREATED_AT, direction: DESC}) {
-        nodes {
-          createdAt
-          name
-          description
+
+
+function Repositories({dispatch, state}) {
+  
+  const bodyRepo = {
+    "query": `
+    query {
+      user(login: "${state.username}") {
+        repositories(first: 15, orderBy: {field: CREATED_AT, direction: DESC}) {
+          nodes {
+            createdAt
+            name
+            description
+          }
         }
       }
     }
+    `
   }
-  `
-}
-
-const bodyStar = {
-  "query": `
-  query {
-    user(login: "${user.username}") {
-     starredRepositories(first: 15, orderBy: {field:STARRED_AT, direction: DESC}) {
-       nodes{
-        name
-        description
-      }
-     }
-    }
+  
+  const baseUrl = "https://api.github.com/graphql";
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "bearer " + state.token
   }
-  `
-}
-
-const baseUrl = "https://api.github.com/graphql";
-const headers = {
-  "Content-Type": "application/json",
-  "Authorization": "bearer " + user.token
-}
-
-
-async function getRepositories() {
-  try {
-    const response = await axios({method: "post", url: baseUrl,  data: JSON.stringify(bodyRepo), headers: headers});
-    console.log(response.data.data.user);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-async function getStarredRepositories() {
-  try {
-    const response = await axios({method: "post", url: baseUrl,  data: JSON.stringify(bodyStar), headers: headers});
-    console.log(response.data.data.user);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-function Repositories() {
+  
+ 
 
   useEffect(()=> { 
+    async function getRepositories() {
+      try {
+        const response = await axios({method: "post", url: baseUrl,  data: JSON.stringify(bodyRepo), headers: headers});
+        const data = response.data.data.user.repositories.nodes;
+        dispatch({type: 'setRepositories', value: data})
+      } catch (error) {
+        console.error(error);
+      }
+    }
     getRepositories();
-    getStarredRepositories();
+
   }
   , [])
     return (
       <>
         <p>Repositorios GitHub</p>
+        <Repos state={state} dispatch={dispatch}/>
       </>
     );
 }

@@ -4,7 +4,7 @@ import Repos from "./repos";
 function Favorites({state, dispatch}) {
     console.log('favs', state)
     return (
-        <Repos repos={state.favRepos} dispatch={dispatch}/>
+        <Repos repos={state.favRepos} favs={state.favs} dispatch={dispatch}/>
     )
 }
 

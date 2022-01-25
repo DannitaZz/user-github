@@ -16,7 +16,7 @@ function Repositories({state, dispatch}) {
     "query": `
     query {
       user(login: "${state.username}") {
-        repositories(first: 15, orderBy: {field: CREATED_AT, direction: DESC}) {
+        repositories(first: 10, orderBy: {field: CREATED_AT, direction: DESC}) {
           nodes {
             createdAt
             name
@@ -42,6 +42,7 @@ function Repositories({state, dispatch}) {
       try {
         const response = await axios({method: "post", url: baseUrl,  data: JSON.stringify(bodyRepo), headers: headers});
         const data = response.data.data.user.repositories.nodes;
+        console.log('data: ', data)
         dispatch({type: 'setRepositories', value: data})
       } catch (error) {
         console.error(error);
@@ -54,7 +55,7 @@ function Repositories({state, dispatch}) {
     return (
       <>
         <p>Repositorios GitHub</p>
-        <Repos repos={state.repos} dispatch={dispatch}/>
+        <Repos repos={state.repos} favs= {state.favs} dispatch={dispatch}/>
       </>
     );
 }

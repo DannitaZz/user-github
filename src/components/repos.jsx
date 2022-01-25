@@ -6,15 +6,16 @@ import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import StarBorderSharpIcon from '@mui/icons-material/StarBorderSharp';
+import StarIcon from '@mui/icons-material/Star';
 import { Grid } from '@mui/material';
 
-function ReposList({ repos, dispatch }) {
+function ReposList({ repos, favs, dispatch }) {
   return (
 
     <List sx={{ width: '100%', maxWidth: 1500, bgcolor: 'background.paper' }} align='center'>
       {repos && repos.map((repo, i) => {
         
-        return <div key={i}>
+        return <div key={repo.id}>
           <ListItem alignItems="center">
             <ListItemText
               align="center"
@@ -33,7 +34,13 @@ function ReposList({ repos, dispatch }) {
                 </React.Fragment>
               }
             />
-            <StarBorderSharpIcon onClick={(e) => dispatch({type: 'favs', value: repo.id})}/>
+            {(()=> {
+                if(favs.includes(repo.id)) {
+                  return <StarIcon onClick={(e) => dispatch({type: 'favs', value: repo.id})}/>
+                } else {
+                  return <StarBorderSharpIcon onClick={(e) => dispatch({type: 'favs', value: repo.id})}/>
+                }
+            })()}
           </ListItem>
           <Divider variant="inset" component="li" />
         </div>
@@ -43,7 +50,7 @@ function ReposList({ repos, dispatch }) {
   );
 }
 
-function Repos({ repos, dispatch }) {
+function Repos({ repos, favs, dispatch }) {
   return (
     <Grid
       container
@@ -58,7 +65,7 @@ function Repos({ repos, dispatch }) {
         <Typography variant="h4" color="text" style={{ marginTop: "15%" }}>Repositories</Typography>
       </Grid>
       <Grid item xs={12} style={{ minWidth: "80vw" }}>
-        <ReposList repos={repos} dispatch={dispatch} />
+        <ReposList repos={repos} favs={favs} dispatch={dispatch} />
       </Grid>
 
     </Grid>

@@ -10,7 +10,7 @@ import Repos from "./repos";
 
 
 
-function Repositories({dispatch, state}) {
+function Repositories({state, dispatch}) {
   
   const bodyRepo = {
     "query": `
@@ -54,7 +54,7 @@ function Repositories({dispatch, state}) {
     return (
       <>
         <p>Repositorios GitHub</p>
-        <Repos state={state} dispatch={dispatch}/>
+        <Repos repos={state.repos} dispatch={dispatch}/>
       </>
     );
 }

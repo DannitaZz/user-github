@@ -5,6 +5,7 @@ export const initialState = {
     token: '',
     repos: [],
     favs: [],
+    favRepos: []
 }
 
 export const reducer = (state, action) => {
@@ -19,16 +20,20 @@ export const reducer = (state, action) => {
             return {...state, repos: repos}
         case 'favs': 
             const id = action.value;
-            console.log('En reducer', id)
             let currentFavs = JSON.parse(JSON.stringify(state.favs));
+            const currentRepos = JSON.parse(JSON.stringify(state.repos));
             if (currentFavs.includes(id)) {
                 currentFavs.pop(id);
             } else {
                 currentFavs.push(id);
             }
-            console.log(currentFavs)
-            return {...state, favs: currentFavs}
-
-    
+            let newRepos = [];
+            currentRepos.forEach(element => {
+                if (currentFavs.includes(element.id)) {
+                    newRepos.push(element);
+                }
+            });
+            console.log('Reducer', newRepos);
+            return {...state, favs: currentFavs, favRepos: newRepos}
     }
 }

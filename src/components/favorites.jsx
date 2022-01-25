@@ -1,8 +1,10 @@
 import React from "react";
+import Repos from "./repos";
 
-function Favorites() {
+function Favorites({state, dispatch}) {
+    console.log('favs', state)
     return (
-        <p>Favorites</p>
+        <Repos repos={state.favRepos} dispatch={dispatch}/>
     )
 }
 

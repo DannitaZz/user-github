@@ -4,6 +4,6 @@ Este proyecto permite iniciar sesión con un username de GitHub y su token corre
 
 ## Generar token de acceso de GitHub
 
-- Leer: [¡Cómo generar un token de acceso en GitHUb?]{https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token}
+- Leer: [Cómo generar un token de acceso en GitHb]{https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token}
 
 

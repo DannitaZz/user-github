@@ -8,6 +8,14 @@ export const initialState = {
     favRepos: []
 }
 
+function arrayRemove(arr, value) { 
+    
+    return arr.filter(function(e){ 
+        return e !== value; 
+    });
+}
+
+
 export const reducer = (state, action) => {
     switch (action.type) {
         case 'signIn': 
@@ -25,10 +33,7 @@ export const reducer = (state, action) => {
             const currentRepos = JSON.parse(JSON.stringify(state.repos));
 
             if (currentFavs.includes(id)) {
-                
-                currentFavs.forEach(() => {
-                    
-                })
+                currentFavs = arrayRemove(currentFavs, id);
             } else {
                 currentFavs.push(id);
             }
